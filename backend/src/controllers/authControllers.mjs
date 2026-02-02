@@ -17,6 +17,7 @@ const postRegister = async (req, res) => {
   let userId = null;
   const usernameRegex = /^[a-zA-Z0-9]{3,}$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const adminForbiddenRegex = /^admin/i;
 
   const { name, email, password, passwordConfirm, username } = req.body;
   if (!name || !email || !password || !passwordConfirm || !username) {
@@ -36,6 +37,11 @@ const postRegister = async (req, res) => {
   }
   if (password !== passwordConfirm) {
     return res.status(400).json({ message: "Passwords do not match" });
+  }
+  if (adminForbiddenRegex.test(username)) {
+    return res.status(400).json({
+      message: "Username cannot contain 'admin' or restricted keywords.",
+    });
   }
   const session = await mongoose.startSession();
   session.startTransaction();

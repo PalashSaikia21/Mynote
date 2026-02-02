@@ -62,7 +62,7 @@ export default function Login() {
 
         <div className="relative z-10">
           <h2 className="text-3xl font-black text-[#451A03] text-center mb-2 tracking-tight">
-            Cognitive Amber
+            My Notes
           </h2>
           <p className="text-center text-[#92400E] text-xs uppercase tracking-widest font-bold mb-8">
             Access your intellect

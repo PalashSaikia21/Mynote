@@ -22,7 +22,7 @@ const Privacypolicy = () => {
             </div>
 
             <h1 className="text-3xl font-black text-[#FDE68A] tracking-tight relative z-10">
-              The Cognitive Charter
+              My Edu Note
             </h1>
             <p className="mt-2 text-[#D97706] font-bold uppercase tracking-widest text-xs relative z-10">
               Privacy & Data Ethics • Last Revised: {lastUpdated}
@@ -99,13 +99,13 @@ const Privacypolicy = () => {
                   Inquiries & Correspondance
                 </h2>
                 <p className="text-sm text-[#92400E] mb-6">
-                  Address your concerns to our ethics officer:
+                  Address your concerns to us:
                 </p>
                 <a
                   href="mailto:privacy@cognitiveamber.com"
                   className="flex items-center gap-2 px-8 py-3 bg-[#451A03] text-[#FDE68A] rounded-full font-bold hover:bg-black transition-all shadow-lg"
                 >
-                  <Mail size={18} /> privacy@cognitiveamber.com
+                  <Mail size={18} /> palash2014143@gmail.com
                 </a>
               </div>
             </section>

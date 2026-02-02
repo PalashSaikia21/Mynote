@@ -49,10 +49,10 @@ export default function Signup() {
 
         <div className="relative z-10">
           <h2 className="text-2xl font-black text-[#451A03] text-center mb-1 tracking-tight">
-            Begin Your Archive
+            Begin Your Notes
           </h2>
           <p className="text-center text-[#92400E] text-[10px] uppercase tracking-[0.2em] font-bold mb-8">
-            Establish your cognitive identity
+            Establish your identity
           </p>
 
           <form onSubmit={onSubmit} className="space-y-4">

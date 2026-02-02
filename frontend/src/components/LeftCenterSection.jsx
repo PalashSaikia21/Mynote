@@ -24,6 +24,7 @@ export default function Leftcentersection({
 }) {
   const [expandMyNote, setExpandMyNote] = useState(false);
   const [expandTagNote, setExpandTagNote] = useState(false);
+  const [expandEncryptedNote, setExpandEncryptedNote] = useState(false);
   const [expandPublic, setExpandPublic] = useState(false);
   const [expandArchived, setExpandArchived] = useState(false);
   const [searchString, setSearchString] = useState("");
@@ -95,6 +96,7 @@ export default function Leftcentersection({
     setExpandArchived(false);
     setExpandMyNote(false);
     setExpandTagNote(false);
+    setExpandEncryptedNote(false);
 
     if (newState) fetchPublicNotes();
   };
@@ -149,6 +151,7 @@ export default function Leftcentersection({
               setExpandArchived(false);
               setExpandPublic(false);
               setExpandTagNote(false);
+              setExpandEncryptedNote(false);
             }}
           >
             {expandMyNote ? (
@@ -200,6 +203,7 @@ export default function Leftcentersection({
               setExpandArchived(false);
               setExpandPublic(false);
               setExpandTagNote(!expandTagNote);
+              setExpandEncryptedNote(false);
             }}
           >
             {expandTagNote ? (
@@ -237,6 +241,65 @@ export default function Leftcentersection({
             </div>
           )}
         </section>
+
+        {/* --- Encrypted NOTES --- */}
+        <section>
+          <button
+            className={`w-full flex items-center gap-2 p-2 rounded-lg transition-colors text-sm font-bold ${
+              expandEncryptedNote
+                ? "text-[#92400E] bg-[#FEF3C7]"
+                : "text-[#78350F]/80 hover:bg-[#F7F2E7]"
+            }`}
+            onClick={() => {
+              setExpandMyNote(false);
+              setExpandArchived(false);
+              setExpandPublic(false);
+              setExpandEncryptedNote(!expandEncryptedNote);
+              setExpandTagNote(false);
+            }}
+          >
+            {expandEncryptedNote ? (
+              <ChevronDown size={14} />
+            ) : (
+              <ChevronRight size={14} />
+            )}
+            <Hash size={16} className="shrink-0 opacity-80" />
+            <span>Encrypted</span>
+          </button>
+
+          {expandEncryptedNote && (
+            <div className="mt-1 ml-4 border-l border-[#D97706]/30 space-y-0.5">
+              {/* {tagNotes.map((note) => (
+                <div
+                  key={note._id}
+                  className="group flex items-center hover:bg-[#FEF3C7]/50 rounded-r-md transition-all"
+                >
+                  <button
+                    onClick={() => setView(note._id)}
+                    className="flex-1 text-left py-1.5 px-3 truncate text-xs text-[#78350F] group-hover:text-[#B45309]"
+                  >
+                    {note.title}
+                  </button>
+                  <div className="flex px-2 opacity-20 group-hover:opacity-100 transition-opacity scale-75">
+                    <Privacyicons
+                      note={note}
+                      callBack={callBack}
+                      setView={setView}
+                      setTagNotes={setTagNotes}
+                    />
+                  </div>
+                </div>
+              ))} */}
+              <button
+                onClick={() => alert("This feature is coming soon!")}
+                className="flex-1 text-left py-1.5 px-3 truncate text-xs text-[#78350F] group-hover:text-[#B45309]"
+              >
+                {" "}
+                Coming Soon: Encrypted Notes Management
+              </button>
+            </div>
+          )}
+        </section>
         {/* --- Deleted NOTES --- */}
         <section>
           <button
@@ -250,6 +313,7 @@ export default function Leftcentersection({
               setExpandMyNote(false);
               setExpandPublic(false);
               setExpandTagNote(false);
+              setExpandEncryptedNote(false);
             }}
           >
             {expandArchived ? (

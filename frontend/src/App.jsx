@@ -8,6 +8,7 @@ import Editnote from "./components/EditNotes.jsx";
 import Othersprofile from "./pages/OthersProfile.jsx";
 import Message from "./components/Message.jsx";
 import Privacypolicy from "./pages/PrivacyPolicy.jsx";
+import Pagenotfound from "./components/PageNotFound.jsx";
 
 export default function App() {
   return (
@@ -22,7 +23,7 @@ export default function App() {
         <Route path="/othersProfile/:id" element={<Othersprofile />} />
         <Route path="/message/:userId" element={<Message />} />
         <Route path="/privacyPolicy" element={<Privacypolicy />} />
-        <Route path="*" element={<h1>404 not found</h1>} />
+        <Route path="*" element={<Pagenotfound />} />
       </Routes>
     </div>
   );
