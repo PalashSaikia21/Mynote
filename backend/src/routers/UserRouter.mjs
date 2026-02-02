@@ -99,5 +99,8 @@ userRouter.get(
   authentication,
   unfollowUser
 );
+userRouter.get("/test", (req, res) => {
+  res.send("Hello from user router!");
+});
 
 export default userRouter;
