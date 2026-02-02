@@ -1,0 +1,18 @@
+# Node.js / React / Next.js
+**/node_modules/
+**/build/
+**/dist/
+
+# Environment Secrets (CRITICAL)
+**/.env
+**/.env.local
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Backend Specific (e.g., Python/Django)
+**/__pycache__/
+**/*.pyc
+backend/venv/
