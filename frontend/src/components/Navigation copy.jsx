@@ -28,7 +28,7 @@ export default function Navigation({ name, id, page = "other" }) {
     try {
       // Using your specific backend structure
       const response = await axios.post(
-        `https://mynotebackend-qmqy.onrender.com/user/searchUser/${id}`,
+        `${config.apiUrl}/user/searchUser/${id}`,
         { username: searchQuery },
         {
           headers: {
@@ -53,7 +53,7 @@ export default function Navigation({ name, id, page = "other" }) {
     if (user) {
       try {
         const response = await fetch(
-          `https://mynotebackend-qmqy.onrender.com/user/notifications/${user._id}`,
+          `${config.apiUrl}/user/notifications/${user._id}`,
           {
             headers: {
               "Content-Type": "application/json",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navigation from "../components/Navigation.jsx";
 import Securityquestion from "../components/SecurityQuestion";
+import config from "../config";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   LogOut,
@@ -45,7 +46,7 @@ export default function Profile() {
     try {
       setOtpSent(true); // Show input field immediately for feedback
       await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/requestOTP",
+        `${config.apiUrl}/requestOTP`,
         { email: user.username },
         {
           headers: {
@@ -65,7 +66,7 @@ export default function Profile() {
     try {
       setOtpSent(true); // Show input field immediately for feedback
       const response = await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/changeEmail",
+        `${config.apiUrl}/changeEmail`,
         { email: emailInput, username: user.username },
         {
           headers: {
@@ -96,7 +97,7 @@ export default function Profile() {
     setVerifying(true);
     try {
       await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/verifyOTP",
+        `${config.apiUrl}/verifyOTP`,
         { email: user.username, otp: otpCode },
         {
           headers: {
@@ -121,7 +122,7 @@ export default function Profile() {
         return;
       }
       const response = await axios.post(
-        `https://mynotebackend-qmqy.onrender.com/user/profile/${id}`,
+        `${config.apiUrl}/user/profile/${id}`,
         { userId: user._id, token: user.token },
         {
           headers: {
@@ -189,38 +190,43 @@ export default function Profile() {
                   </p>
                   <div className="flex flex-col gap-2">
                     {!changeEmailMode && (
-                      <div className="flex items-center">
-                        <span className="text-lg font-semibold text-[#2C2C2C]">
+                      /* Change: added flex-wrap and items-center */
+                      <div className="flex flex-wrap items-center gap-2 max-w-full">
+                        <span className="text-lg font-semibold text-[#2C2C2C] truncate max-w-[200px] sm:max-w-none">
                           {profileData.email}
                         </span>
 
-                        <button
-                          className={`w-3 h-3 rounded-full ml-2 transition-transform hover:scale-110`}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setChangeEmailMode(true);
-                          }}
-                        >
-                          <Pencil
-                            size={12}
-                            className="text-[#8B4513]/50 hover:text-[#8B4513]"
+                        <div className="flex items-center gap-2">
+                          {" "}
+                          {/* Group buttons so they stay together */}
+                          <button
+                            className="w-4 h-4 flex items-center justify-center rounded-full transition-transform hover:scale-110"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              setChangeEmailMode(true);
+                            }}
+                          >
+                            <Pencil
+                              size={14}
+                              className="text-[#8B4513]/50 hover:text-[#8B4513]"
+                            />
+                          </button>
+                          <button
+                            onClick={
+                              !profileData.isUserVerified ? sendOtp : undefined
+                            }
+                            className={`w-3 h-3 rounded-full transition-transform hover:scale-110 ${
+                              profileData.isUserVerified
+                                ? "bg-green-500"
+                                : "bg-red-500 cursor-pointer"
+                            }`}
+                            title={
+                              profileData.isUserVerified
+                                ? "Verified"
+                                : "Click to verify email"
+                            }
                           />
-                        </button>
-                        <button
-                          onClick={
-                            !profileData.isUserVerified ? sendOtp : undefined
-                          }
-                          className={`w-3 h-3 rounded-full ml-2 transition-transform hover:scale-110 ${
-                            profileData.isUserVerified
-                              ? "bg-green-500"
-                              : "bg-red-500 cursor-pointer"
-                          }`}
-                          title={
-                            profileData.isUserVerified
-                              ? "Verified"
-                              : "Click to verify email"
-                          }
-                        />
+                        </div>
                       </div>
                     )}
                     {changeEmailMode && (
@@ -327,7 +333,6 @@ export default function Profile() {
                 </div>
               </div>
             )}
-
             {profileData?._id === user?._id && (
               <div className="flex flex-wrap gap-4 pt-6 border-t border-[#E5E1DA]">
                 <button

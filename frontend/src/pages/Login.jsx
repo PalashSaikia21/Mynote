@@ -4,6 +4,7 @@ import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { Lock, Mail, BookOpen, X, HelpCircle } from "lucide-react";
 import Changepassword from "../components/ChangePassword";
 import Securityquestion from "../components/SecurityQuestion";
+import config from "../config";
 
 export default function Login() {
   const [searchParams] = useSearchParams();
@@ -36,13 +37,9 @@ export default function Login() {
     setError("");
     try {
       const payload = { email, password };
-      const data = await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/login",
-        payload,
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
+      const data = await axios.post(`${config.apiUrl}/login`, payload, {
+        headers: { "Content-Type": "application/json" },
+      });
 
       if (data.status === 200) {
         localStorage.setItem("user", JSON.stringify(data.data.user));

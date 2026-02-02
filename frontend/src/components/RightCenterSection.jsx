@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
+import config from "../config";
 import {
   ThumbsUp,
   Trash2,
@@ -36,15 +38,12 @@ export default function Rightcentersection({
       if (!id || id === "createNote" || !user?.token) return;
 
       try {
-        const response = await fetch(
-          `https://mynotebackend-qmqy.onrender.com/notes/getNote/${id}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
+        const response = await fetch(`${config.apiUrl}/notes/getNote/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${user.token}`,
+          },
+        });
 
         if (!response.ok) throw new Error("Failed to fetch note.");
 
@@ -81,7 +80,7 @@ export default function Rightcentersection({
     if (!window.confirm("Are you sure you want to delete this note?")) return;
     try {
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/deleteNote/${id}/${user._id}`
+        `${config.apiUrl}/notes/deleteNote/${id}/${user._id}`
       );
       setActiveView("createNote");
       if (!response.ok) throw new Error("Failed to delete.");
@@ -96,7 +95,7 @@ export default function Rightcentersection({
     const typeOn = "Notes";
     try {
       await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
+        `${config.apiUrl}/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
         {
           headers: { authorization: `Bearer ${user.token}` },
         }
@@ -119,17 +118,14 @@ export default function Rightcentersection({
     }
     // Implement report functionality here
     try {
-      await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/reportNote/${noteId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${user.token}`,
-          },
-          body: JSON.stringify({ reason }),
-        }
-      );
+      await fetch(`${config.apiUrl}/notes/reportNote/${noteId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ reason }),
+      });
       setLikeStatus(!likeStatus);
       setIsReportedByUser(true);
       fetchNoteDetails(); // Refresh counts

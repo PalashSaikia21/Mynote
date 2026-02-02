@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { X, Eye, EyeOff } from "lucide-react";
 
+import config from "../config";
+
 import axios from "axios";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -41,7 +43,7 @@ export default function Changepassword({
     try {
       //alert("This is a demo. Password change functionality is disabled.");
       const response = await axios.post(
-        `https://mynotebackend-qmqy.onrender.com/changePassword`,
+        `${config.apiUrl}/changePassword`,
         {
           occassion: occassion,
           email: email, //this can be username or email

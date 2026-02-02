@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
+
+import config from "../config";
 import {
   MessageCircle,
   ThumbsUp,
@@ -35,7 +37,7 @@ export default function Comments({ noteId }) {
 
     try {
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/getComment/${noteId}`,
+        `${config.apiUrl}/notes/getComment/${noteId}`,
         {
           headers: { authorization: `Bearer ${user.token}` },
         }
@@ -68,7 +70,7 @@ export default function Comments({ noteId }) {
       };
 
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/postComment/${noteId}`,
+        `${config.apiUrl}/notes/postComment/${noteId}`,
         {
           method: "POST",
           headers: {
@@ -98,7 +100,7 @@ export default function Comments({ noteId }) {
     const user = JSON.parse(localStorage.getItem("user"));
     try {
       await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
+        `${config.apiUrl}/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
         {
           headers: { authorization: `Bearer ${user.token}` },
         }

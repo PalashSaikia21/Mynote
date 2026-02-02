@@ -6,6 +6,7 @@ import Notetoapprove from "./NoteToApprove";
 import { Users, FileText, Clock, ShieldCheck } from "lucide-react";
 import Userlist from "./UserList";
 import Activeuser from "./ActiveUsers";
+import config from "../config";
 
 export default function Administratorprofile() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function Administratorprofile() {
       const payload = { userType: newUserType };
 
       const response = await axios.post(
-        `https://mynotebackend-qmqy.onrender.com/user/handleUser/${userToUpdate}`,
+        `${config.apiUrl}/user/handleUser/${userToUpdate}`,
         payload,
         {
           headers: {
@@ -60,12 +61,9 @@ export default function Administratorprofile() {
   useEffect(() => {
     const fetchAdminStats = async () => {
       try {
-        const response = await axios.get(
-          "https://mynotebackend-qmqy.onrender.com/user/admin/stats",
-          {
-            headers: { authorization: `Bearer ${user.token}` },
-          }
-        );
+        const response = await axios.get(`${config.apiUrl}/user/admin/stats`, {
+          headers: { authorization: `Bearer ${user.token}` },
+        });
         setStats(response.data);
       } catch (error) {
         console.error("Error fetching admin stats:", error);
@@ -81,7 +79,7 @@ export default function Administratorprofile() {
       if (!user?._id) return;
       const payload = { username: searchQuery };
       const response = await axios.post(
-        `https://mynotebackend-qmqy.onrender.com/user/searchUser/${user._id}`,
+        `${config.apiUrl}/user/searchUser/${user._id}`,
         payload,
         {
           headers: {
@@ -106,21 +104,24 @@ export default function Administratorprofile() {
   return (
     <div className="min-h-screen bg-[#FDFBF7] p-6">
       {/* 1. TOP ACTION BAR */}
-      <div className="max-w-7xl mx-auto mb-8 flex justify-between items-center bg-white p-4 rounded-2xl border border-[#E5E1DA] shadow-sm">
+      {/* 1. TOP ACTION BAR */}
+      <div className="max-w-7xl mx-auto mb-8 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center bg-white p-4 rounded-2xl border border-[#E5E1DA] shadow-sm">
         <div className="flex items-center gap-2 text-[#8B4513]">
           <ShieldCheck size={24} />
           <h1 className="font-serif font-bold text-xl">Admin Console</h1>
         </div>
-        <div className="flex gap-4">
+
+        {/* Buttons container: full width on mobile */}
+        <div className="flex flex-wrap gap-3 w-full sm:w-auto">
           <button
             onClick={() => setIsModalOpen(true)}
-            className="bg-[#8B4513] text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-[#6F3710] transition-all shadow-md"
+            className="flex-1 sm:flex-none bg-[#8B4513] text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-[#6F3710] transition-all shadow-md"
           >
             Promote User
           </button>
           <button
             onClick={() => setNoteToApprove(true)}
-            className="bg-[#D4A373] text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-[#bc8a5f] transition-all shadow-md"
+            className="flex-1 sm:flex-none bg-[#D4A373] text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-[#bc8a5f] transition-all shadow-md"
           >
             Verify Notes
           </button>

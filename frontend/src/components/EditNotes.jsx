@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Eraser, Save, Undo2, Redo2 } from "lucide-react";
 import Toolbar from "./Toolbar";
+import config from "../config";
 
 export default function Editnotes({ thisNote, setActiveView }) {
   const [title, setTitle] = useState(thisNote?.title || "");
@@ -101,7 +102,7 @@ export default function Editnotes({ thisNote, setActiveView }) {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/updateNote/${thisNote._id}`,
+        `${config.apiUrl}/notes/updateNote/${thisNote._id}`,
         {
           method: "POST",
           headers: {

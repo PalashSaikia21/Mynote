@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
 import { User, Mail, Lock, PenTool, Hash } from "lucide-react";
 
+import config from "../config";
 export default function Signup() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -22,10 +23,7 @@ export default function Signup() {
 
     try {
       const payload = { name, email, password, passwordConfirm, username };
-      const response = await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/register",
-        payload
-      );
+      const response = await axios.post(`${config.apiUrl}/register`, payload);
 
       if (response.status === 201) {
         navigate(`/login?username=${encodeURIComponent(username)}`);
@@ -166,7 +164,7 @@ export default function Signup() {
 
           <div className="mt-8 pt-6 border-t border-[#E8E2D2] text-center">
             <p className="text-xs text-[#78350F]/70">
-              Already a member of the archive?{" "}
+              Already a member of the MyNote?{" "}
               <Link
                 to="/login"
                 className="text-[#B45309] font-black hover:underline"

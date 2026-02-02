@@ -9,6 +9,7 @@ import Notification from "../models/notificationModel.mjs";
 import Follow from "../models/followerModel.mjs";
 
 const getProfile = async (req, res) => {
+  console.log("Get profile is working", req.params.userId);
   try {
     const userLogedIn = await User.findById(req.params.userId).select(
       "+securityQuestion +securityAnswer"

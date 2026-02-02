@@ -4,6 +4,8 @@ import Shownote from "./ShowNote";
 import Closebutton from "./CloseButton";
 import { BookOpenCheck, Inbox, ArrowRight } from "lucide-react";
 
+import config from "../config";
+
 export default function Notetoapprove({ setNoteToApprove }) {
   const [noteList, setNoteList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +19,7 @@ export default function Notetoapprove({ setNoteToApprove }) {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `https://mynotebackend-qmqy.onrender.com/user/noteToApprove/${user._id}`,
+        `${config.apiUrl}/user/noteToApprove/${user._id}`,
         {
           headers: {
             "Content-Type": "application/json",

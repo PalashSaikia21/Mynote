@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Eraser, Save } from "lucide-react";
 import Toolbar from "./Toolbar";
+import config from "../config";
 
 export default function Createnote({ setActiveView }) {
   const [title, setTitle] = useState("");
@@ -180,7 +181,7 @@ export default function Createnote({ setActiveView }) {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/notes/createNote/${user._id}`,
+        `${config.apiUrl}/notes/createNote/${user._id}`,
         {
           method: "POST",
           headers: {

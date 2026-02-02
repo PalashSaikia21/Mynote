@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+
+import config from "../config";
 import { useParams, useNavigate } from "react-router-dom";
 import Navigation from "./Navigation";
 
@@ -16,9 +18,7 @@ export default function Message({ setActiveView, otherUserId, isNested }) {
     queryKey: ["chat", userId],
     queryFn: () =>
       axios
-        .get(
-          `https://mynotebackend-qmqy.onrender.com/user/message/${userId}/${user._id}`
-        )
+        .get(`${config.apiUrl}/user/message/${userId}/${user._id}`)
         .then((res) => res.data),
     refetchInterval: 3000,
   });
@@ -26,17 +26,14 @@ export default function Message({ setActiveView, otherUserId, isNested }) {
   const sendMessage = async () => {
     if (!message.trim()) return;
     try {
-      const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/user/message/${userId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${user.token}`,
-          },
-          body: JSON.stringify({ message, senderId: user._id }),
-        }
-      );
+      const response = await fetch(`${config.apiUrl}/user/message/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify({ message, senderId: user._id }),
+      });
       if (!response.ok) throw new Error("Failed to send.");
       setMessage("");
     } catch (error) {

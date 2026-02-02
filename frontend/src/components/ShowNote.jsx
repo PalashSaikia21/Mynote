@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 
+import config from "../config";
+
 export default function Shownote({
   title,
   content,
@@ -17,7 +19,7 @@ export default function Shownote({
       try {
         const payload = { label: label };
         const response = await axios.post(
-          `https://mynotebackend-qmqy.onrender.com/user/approveNote/${noteId}`,
+          `${config.apiUrl}/user/approveNote/${noteId}`,
           payload,
           {
             headers: {

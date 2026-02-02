@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { X, HelpCircle, Send } from "lucide-react";
 
+import config from "../config";
+
 export default function Securityquestion({
   setRecoveryAllowed,
   setIsSecurityModalOpen,
@@ -40,7 +42,7 @@ export default function Securityquestion({
       };
 
       const data = await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/changeSecurity",
+        `${config.apiUrl}/changeSecurity`,
         payload,
         {
           headers: {
@@ -63,7 +65,7 @@ export default function Securityquestion({
     try {
       setOtpSent(true); // Show input field immediately for feedback
       await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/requestOTPForPassword",
+        `${config.apiUrl}/requestOTPForPassword`,
         { email: email },
         {
           headers: {
@@ -84,7 +86,7 @@ export default function Securityquestion({
     setVerifying(true);
     try {
       await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/verifyOTPForPassword",
+        `${config.apiUrl}/verifyOTPForPassword`,
         { email, otp: otpCode },
         {
           headers: {
@@ -116,7 +118,7 @@ export default function Securityquestion({
 
     try {
       const data = await axios.post(
-        "https://mynotebackend-qmqy.onrender.com/recoveryPassword",
+        `${config.apiUrl}/recoveryPassword`,
         payload,
 
         {

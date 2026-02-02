@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+import config from "../config";
+
 export default function Messageindex({ setActiveView, setOtherUserId }) {
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
@@ -12,9 +14,7 @@ export default function Messageindex({ setActiveView, setOtherUserId }) {
     if (!user) return;
 
     try {
-      const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/user/message/${user._id}`
-      );
+      const response = await fetch(`${config.apiUrl}/user/message/${user._id}`);
       if (!response.ok) throw new Error("Failed to fetch conversations.");
       const data = await response.json();
       setMessages(data.messages || []);

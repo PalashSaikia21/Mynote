@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Navigation from "../components/Navigation.jsx";
 import Skeletonloader from "../components/SkeletonLoader.jsx";
 import { MessageSquare, UserPlus, BookOpen } from "lucide-react";
+
+import config from "../config";
 export default function Othersprofile() {
   const navigate = useNavigate();
   const [userDetail, setUserDetail] = useState(null);
@@ -18,7 +20,7 @@ export default function Othersprofile() {
     if (!user?.token) return;
     try {
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/user/othersProfile/${id}`,
+        `${config.apiUrl}/user/othersProfile/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +49,7 @@ export default function Othersprofile() {
   const followUser = async () => {
     try {
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/user/followUser/${user._id}/${id}`,
+        `${config.apiUrl}/user/followUser/${user._id}/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -64,7 +66,7 @@ export default function Othersprofile() {
     alert("You have unfollowed this scholar!");
     try {
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/user/unfollowUser/${user._id}/${id}`,
+        `${config.apiUrl}/user/unfollowUser/${user._id}/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

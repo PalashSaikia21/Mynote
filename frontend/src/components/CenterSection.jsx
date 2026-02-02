@@ -8,6 +8,8 @@ import Messageindex from "./MessageIndex";
 import Message from "./Message";
 import { ChevronLeft } from "lucide-react";
 
+import config from "../config";
+
 export default function Centersection({ activeView, setActiveView }) {
   const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ export default function Centersection({ activeView, setActiveView }) {
     if (currentUser) {
       try {
         const response = await fetch(
-          `https://mynotebackend-qmqy.onrender.com/notes/getAllNotes/${currentUser._id}`,
+          `${config.apiUrl}/notes/getAllNotes/${currentUser._id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -59,7 +61,7 @@ export default function Centersection({ activeView, setActiveView }) {
       if (currentUser) {
         try {
           const response = await fetch(
-            `https://mynotebackend-qmqy.onrender.com/user/tagNotes/${currentUser.username}`,
+            `${config.apiUrl}/user/tagNotes/${currentUser.username}`,
             {
               headers: {
                 "Content-Type": "application/json",

@@ -3,6 +3,8 @@ import Closebutton from "./CloseButton";
 import axios from "axios";
 import { UserPlus, Search, X, Users } from "lucide-react";
 
+import config from "../config";
+
 export default function Tagnote({ onClose, noteId }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchUser, setSearchUser] = useState([]);
@@ -20,7 +22,7 @@ export default function Tagnote({ onClose, noteId }) {
 
     try {
       const response = await axios.post(
-        `https://mynotebackend-qmqy.onrender.com/user/searchUser/${user._id}`,
+        `${config.apiUrl}/user/searchUser/${user._id}`,
         { username: searchQuery },
         {
           headers: {
@@ -51,7 +53,7 @@ export default function Tagnote({ onClose, noteId }) {
 
     try {
       await axios.post(
-        `https://mynotebackend-qmqy.onrender.com/user/tagNote/${user._id}`,
+        `${config.apiUrl}/user/tagNote/${user._id}`,
         { userList: searchUser, noteId: noteId },
         {
           headers: {

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Closebutton from "./CloseButton";
 
+import config from "../config";
+
 export default function Userlist({ onClose, listType, handleUserLabel }) {
   const [users, setUsers] = useState([]);
   const [userLabel, setUserLabel] = useState(listType);
@@ -10,7 +12,7 @@ export default function Userlist({ onClose, listType, handleUserLabel }) {
     try {
       if (!user?._id) return;
       const response = await fetch(
-        `https://mynotebackend-qmqy.onrender.com/user/getUserList/${listType}`,
+        `${config.apiUrl}/user/getUserList/${listType}`,
         {
           method: "GET",
           headers: {
@@ -33,15 +35,14 @@ export default function Userlist({ onClose, listType, handleUserLabel }) {
   return (
     <div className="fixed inset-0 z-50 flex justify-center items-center bg-stone-900/60 backdrop-blur-md">
       {/* Container with Amber Accents */}
-      <div className="bg-[#FFFBEB] rounded-2xl shadow-2xl w-[28rem] border-2 border-[#F59E0B]/30 overflow-hidden">
+      <div className="bg-[#FFFBEB] rounded-2xl shadow-2xl w-[50rem] border-2 border-[#F59E0B]/30 overflow-hidden">
         {/* Header Section */}
-        <div className="bg-[#FEF3C7] px-6 py-4 flex justify-between items-center border-b border-[#FDE68A]">
+        <div className="bg-[#FEF3C7] px-2 py-2 flex justify-between items-center border-b border-[#FDE68A]">
           <h2 className="text-[#92400E] font-bold text-lg capitalize tracking-tight">
             {listType} Directory
           </h2>
           <Closebutton onClose={onClose} />
         </div>
-
         {/* Table Content */}
         <div className="p-4">
           <div className="max-h-80 overflow-y-auto rounded-lg border border-[#FEF3C7]">
@@ -50,6 +51,9 @@ export default function Userlist({ onClose, listType, handleUserLabel }) {
                 <tr>
                   <th className="px-4 py-2 text-[#92400E] text-xs uppercase font-bold">
                     User
+                  </th>
+                  <th className="px-4 py-2 text-[#92400E] text-xs uppercase font-bold">
+                    Verification
                   </th>
                   <th className="px-4 py-2 text-[#92400E] text-xs uppercase font-bold text-right">
                     Trust Index
@@ -73,9 +77,15 @@ export default function Userlist({ onClose, listType, handleUserLabel }) {
                         <div className="font-semibold text-[#78350F]">
                           {user.name}
                         </div>
+
                         <div className="text-xs text-[#B45309]">
                           @{user.username}
                         </div>
+                      </td>
+                      <td className="px-4 py-3 text-right">
+                        <span className="bg-[#F59E0B] text-white px-2 py-1 rounded-full text-xs font-mono">
+                          {user.isVerified ? "Verified" : "Unverified"}
+                        </span>
                       </td>
                       <td className="px-4 py-3 text-right">
                         <span className="bg-[#F59E0B] text-white px-2 py-1 rounded-full text-xs font-mono">
