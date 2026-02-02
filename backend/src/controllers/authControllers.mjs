@@ -82,6 +82,7 @@ const postRegister = async (req, res) => {
     });
     await sendWelcomeEmail(email, name);
     userId = newUser._id;
+    res.status(201).json({ message: "User registered successfully", userId });
   } catch (error) {
     await session.abortTransaction();
     console.error("Error during registration:", error);
