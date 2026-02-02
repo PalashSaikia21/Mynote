@@ -12,8 +12,10 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     setError("");
 
@@ -34,6 +36,8 @@ export default function Signup() {
         err.response?.data?.message || "Enrolment failed. Please try again.";
       setError(message);
       console.log("Signup error:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -41,6 +45,20 @@ export default function Signup() {
     <div className="min-h-screen flex items-center justify-center bg-[#451A03] p-4">
       <div className="max-w-md w-full bg-[#FCF9F1] rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-[#E8E2D2] p-8 relative overflow-hidden">
         {/* Decorative Pen Icon */}
+        {loading && (
+          <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#FDFBF7]/60 backdrop-blur-sm">
+            {/* The Spinner */}
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 border-4 border-[#D4A373]/20 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-[#8B4513] border-t-transparent rounded-full animate-spin"></div>
+            </div>
+
+            {/* The Text */}
+            <p className="mt-4 font-serif font-medium text-[#8B4513] animate-pulse">
+              Creating your account...
+            </p>
+          </div>
+        )}
         <div className="absolute -top-6 -left-6 text-[#D97706] opacity-5 -rotate-12">
           <PenTool size={150} />
         </div>

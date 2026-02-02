@@ -16,6 +16,7 @@ export default function Administratorprofile() {
   const [noteToApprove, setNoteToApprove] = useState(false);
   const [showUserList, setShowUserList] = useState(false);
   const [userListType, setUserListType] = useState("");
+  const [searchError, setSearchError] = useState("");
 
   // --- NEW STATS STATE ---
   const [stats, setStats] = useState({
@@ -75,6 +76,7 @@ export default function Administratorprofile() {
 
   const handleSearch = async (e) => {
     e.preventDefault();
+    setSearchError("");
     try {
       if (!user?._id) return;
       const payload = { username: searchQuery };
@@ -94,7 +96,7 @@ export default function Administratorprofile() {
       setIsUserReceived(true);
     } catch (error) {
       if (error.response?.status === 404) {
-        document.getElementById("warning").innerText = "User Not Found!";
+        setSearchError("User not found.");
         return;
       }
       console.error("Error fetching profile:", error);
@@ -245,7 +247,9 @@ export default function Administratorprofile() {
             </h2>
             <form onSubmit={handleSearch}>
               <div className="mb-6">
-                <div className="text-red-500 text-xs mb-2" id="warning"></div>
+                {searchError && (
+                  <p className="text-red-500 text-xs mb-2">{searchError}</p>
+                )}
                 <input
                   autoFocus
                   type="text"
