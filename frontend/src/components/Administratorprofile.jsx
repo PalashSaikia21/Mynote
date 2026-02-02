@@ -7,7 +7,7 @@ import { Users, FileText, Clock, ShieldCheck } from "lucide-react";
 import Userlist from "./UserList";
 import Activeuser from "./ActiveUsers";
 
-export default function Administatorprofile() {
+export default function Administratorprofile() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchUser, setSearchUser] = useState("");
@@ -35,7 +35,7 @@ export default function Administatorprofile() {
       const payload = { userType: newUserType };
 
       const response = await axios.post(
-        `http://localhost:3400/user/handleUser/${userToUpdate}`,
+        `https://mynotebackend-qmqy.onrender.com/user/handleUser/${userToUpdate}`,
         payload,
         {
           headers: {
@@ -61,7 +61,7 @@ export default function Administatorprofile() {
     const fetchAdminStats = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3400/user/admin/stats",
+          "https://mynotebackend-qmqy.onrender.com/user/admin/stats",
           {
             headers: { authorization: `Bearer ${user.token}` },
           }
@@ -81,7 +81,7 @@ export default function Administatorprofile() {
       if (!user?._id) return;
       const payload = { username: searchQuery };
       const response = await axios.post(
-        `http://localhost:3400/user/searchUser/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/searchUser/${user._id}`,
         payload,
         {
           headers: {

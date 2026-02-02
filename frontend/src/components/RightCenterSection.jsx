@@ -37,7 +37,7 @@ export default function Rightcentersection({
 
       try {
         const response = await fetch(
-          `http://localhost:3400/notes/getNote/${id}`,
+          `https://mynotebackend-qmqy.onrender.com/notes/getNote/${id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -81,7 +81,7 @@ export default function Rightcentersection({
     if (!window.confirm("Are you sure you want to delete this note?")) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/notes/deleteNote/${id}/${user._id}`
+        `https://mynotebackend-qmqy.onrender.com/notes/deleteNote/${id}/${user._id}`
       );
       setActiveView("createNote");
       if (!response.ok) throw new Error("Failed to delete.");
@@ -96,7 +96,7 @@ export default function Rightcentersection({
     const typeOn = "Notes";
     try {
       await fetch(
-        `http://localhost:3400/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
         {
           headers: { authorization: `Bearer ${user.token}` },
         }
@@ -119,14 +119,17 @@ export default function Rightcentersection({
     }
     // Implement report functionality here
     try {
-      await fetch(`http://localhost:3400/notes/reportNote/${noteId}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${user.token}`,
-        },
-        body: JSON.stringify({ reason }),
-      });
+      await fetch(
+        `https://mynotebackend-qmqy.onrender.com/notes/reportNote/${noteId}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${user.token}`,
+          },
+          body: JSON.stringify({ reason }),
+        }
+      );
       setLikeStatus(!likeStatus);
       setIsReportedByUser(true);
       fetchNoteDetails(); // Refresh counts

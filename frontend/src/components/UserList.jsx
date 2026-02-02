@@ -10,7 +10,7 @@ export default function Userlist({ onClose, listType, handleUserLabel }) {
     try {
       if (!user?._id) return;
       const response = await fetch(
-        `http://localhost:3400/user/getUserList/${listType}`,
+        `https://mynotebackend-qmqy.onrender.com/user/getUserList/${listType}`,
         {
           method: "GET",
           headers: {

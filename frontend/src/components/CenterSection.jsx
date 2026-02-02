@@ -27,7 +27,7 @@ export default function Centersection({ activeView, setActiveView }) {
     if (currentUser) {
       try {
         const response = await fetch(
-          `http://localhost:3400/notes/getAllNotes/${currentUser._id}`,
+          `https://mynotebackend-qmqy.onrender.com/notes/getAllNotes/${currentUser._id}`,
           {
             headers: {
               "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export default function Centersection({ activeView, setActiveView }) {
       if (currentUser) {
         try {
           const response = await fetch(
-            `http://localhost:3400/user/tagNotes/${currentUser.username}`,
+            `https://mynotebackend-qmqy.onrender.com/user/tagNotes/${currentUser.username}`,
             {
               headers: {
                 "Content-Type": "application/json",

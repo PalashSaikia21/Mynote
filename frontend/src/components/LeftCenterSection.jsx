@@ -36,7 +36,9 @@ export default function Leftcentersection({
     if (publicNotes.length > 0) return;
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:3400/notes/SearchNote`);
+      const response = await fetch(
+        `https://mynotebackend-qmqy.onrender.com/notes/SearchNote`
+      );
       if (!response.ok) throw new Error("Failed to fetch notes.");
       const data = await response.json();
       setPublicNotes(data.notes || []);
@@ -51,7 +53,7 @@ export default function Leftcentersection({
     if (!window.confirm("Note restored to your Personal Notes.")) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/notes/restoreNote/${noteId}/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/restoreNote/${noteId}/${user._id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -71,7 +73,7 @@ export default function Leftcentersection({
     if (!window.confirm("Archive this thought permanently?")) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/notes/deleteNotePermanently/${noteId}/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/deleteNotePermanently/${noteId}/${user._id}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -31,7 +31,7 @@ export default function Privacyicons({ note, callBack, setView, setTagNotes }) {
     if (!window.confirm("Archive this thought permanently?")) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/notes/deleteNote/${note._id}/${user._id}`
+        `https://mynotebackend-qmqy.onrender.com/notes/deleteNote/${note._id}/${user._id}`
       );
       if (!response.ok) throw new Error("Deletion failed.");
       setView("home");
@@ -45,7 +45,7 @@ export default function Privacyicons({ note, callBack, setView, setTagNotes }) {
     if (!window.confirm("Remove your association with this note?")) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/user/removeTag/${user.username}/${note._id}/${note.userId}`,
+        `https://mynotebackend-qmqy.onrender.com/user/removeTag/${user.username}/${note._id}/${note.userId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export default function Privacyicons({ note, callBack, setView, setTagNotes }) {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3400/notes/updateNote/${note._id}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/updateNote/${note._id}`,
         {
           method: "POST",
           headers: {

@@ -13,7 +13,7 @@ export default function Messageindex({ setActiveView, setOtherUserId }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3400/user/message/${user._id}`
+        `https://mynotebackend-qmqy.onrender.com/user/message/${user._id}`
       );
       if (!response.ok) throw new Error("Failed to fetch conversations.");
       const data = await response.json();

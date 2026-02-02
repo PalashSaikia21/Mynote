@@ -18,7 +18,7 @@ export default function Othersprofile() {
     if (!user?.token) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/user/othersProfile/${id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/othersProfile/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export default function Othersprofile() {
   const followUser = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3400/user/followUser/${user._id}/${id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/followUser/${user._id}/${id}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default function Othersprofile() {
     alert("You have unfollowed this scholar!");
     try {
       const response = await fetch(
-        `http://localhost:3400/user/unfollowUser/${user._id}/${id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/unfollowUser/${user._id}/${id}`,
         {
           headers: {
             "Content-Type": "application/json",

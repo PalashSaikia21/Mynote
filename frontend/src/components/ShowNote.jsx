@@ -17,7 +17,7 @@ export default function Shownote({
       try {
         const payload = { label: label };
         const response = await axios.post(
-          `http://localhost:3400/user/approveNote/${noteId}`,
+          `https://mynotebackend-qmqy.onrender.com/user/approveNote/${noteId}`,
           payload,
           {
             headers: {

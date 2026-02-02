@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 
-import Administatorprofile from "../components/AdministatorProfile.jsx";
+import Administratorprofile from "../components/Administratorprofile.jsx";
 import Changepassword from "../components/ChangePassword.jsx";
 
 export default function Profile() {
@@ -45,7 +45,7 @@ export default function Profile() {
     try {
       setOtpSent(true); // Show input field immediately for feedback
       await axios.post(
-        "http://localhost:3400/requestOTP",
+        "https://mynotebackend-qmqy.onrender.com/requestOTP",
         { email: user.username },
         {
           headers: {
@@ -65,7 +65,7 @@ export default function Profile() {
     try {
       setOtpSent(true); // Show input field immediately for feedback
       const response = await axios.post(
-        "http://localhost:3400/changeEmail",
+        "https://mynotebackend-qmqy.onrender.com/changeEmail",
         { email: emailInput, username: user.username },
         {
           headers: {
@@ -96,7 +96,7 @@ export default function Profile() {
     setVerifying(true);
     try {
       await axios.post(
-        "http://localhost:3400/verifyOTP",
+        "https://mynotebackend-qmqy.onrender.com/verifyOTP",
         { email: user.username, otp: otpCode },
         {
           headers: {
@@ -121,7 +121,7 @@ export default function Profile() {
         return;
       }
       const response = await axios.post(
-        `http://localhost:3400/user/profile/${id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/profile/${id}`,
         { userId: user._id, token: user.token },
         {
           headers: {
@@ -157,7 +157,7 @@ export default function Profile() {
       <div className="max-w-4xl mx-auto p-6">
         {user?.userType === "administrator" && (
           <div className="mb-8">
-            <Administatorprofile />
+            <Administratorprofile />
           </div>
         )}
 

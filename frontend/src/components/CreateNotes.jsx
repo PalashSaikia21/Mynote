@@ -180,7 +180,7 @@ export default function Createnote({ setActiveView }) {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const response = await fetch(
-        `http://localhost:3400/notes/createNote/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/createNote/${user._id}`,
         {
           method: "POST",
           headers: {

@@ -36,9 +36,13 @@ export default function Login() {
     setError("");
     try {
       const payload = { email, password };
-      const data = await axios.post("http://localhost:3400/login", payload, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const data = await axios.post(
+        "https://mynotebackend-qmqy.onrender.com/login",
+        payload,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
 
       if (data.status === 200) {
         localStorage.setItem("user", JSON.stringify(data.data.user));

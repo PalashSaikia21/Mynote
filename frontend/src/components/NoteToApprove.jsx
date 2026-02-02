@@ -17,7 +17,7 @@ export default function Notetoapprove({ setNoteToApprove }) {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `http://localhost:3400/user/noteToApprove/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/noteToApprove/${user._id}`,
         {
           headers: {
             "Content-Type": "application/json",

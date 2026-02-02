@@ -23,7 +23,7 @@ export default function Signup() {
     try {
       const payload = { name, email, password, passwordConfirm, username };
       const response = await axios.post(
-        "http://localhost:3400/register",
+        "https://mynotebackend-qmqy.onrender.com/register",
         payload
       );
 

@@ -20,7 +20,7 @@ export default function Tagnote({ onClose, noteId }) {
 
     try {
       const response = await axios.post(
-        `http://localhost:3400/user/searchUser/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/searchUser/${user._id}`,
         { username: searchQuery },
         {
           headers: {
@@ -51,7 +51,7 @@ export default function Tagnote({ onClose, noteId }) {
 
     try {
       await axios.post(
-        `http://localhost:3400/user/tagNote/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/tagNote/${user._id}`,
         { userList: searchUser, noteId: noteId },
         {
           headers: {

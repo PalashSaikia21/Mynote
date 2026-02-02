@@ -40,7 +40,7 @@ export default function Securityquestion({
       };
 
       const data = await axios.post(
-        "http://localhost:3400/changeSecurity",
+        "https://mynotebackend-qmqy.onrender.com/changeSecurity",
         payload,
         {
           headers: {
@@ -63,7 +63,7 @@ export default function Securityquestion({
     try {
       setOtpSent(true); // Show input field immediately for feedback
       await axios.post(
-        "http://localhost:3400/requestOTPForPassword",
+        "https://mynotebackend-qmqy.onrender.com/requestOTPForPassword",
         { email: email },
         {
           headers: {
@@ -84,7 +84,7 @@ export default function Securityquestion({
     setVerifying(true);
     try {
       await axios.post(
-        "http://localhost:3400/verifyOTPForPassword",
+        "https://mynotebackend-qmqy.onrender.com/verifyOTPForPassword",
         { email, otp: otpCode },
         {
           headers: {
@@ -116,7 +116,7 @@ export default function Securityquestion({
 
     try {
       const data = await axios.post(
-        "http://localhost:3400/recoveryPassword",
+        "https://mynotebackend-qmqy.onrender.com/recoveryPassword",
         payload,
 
         {

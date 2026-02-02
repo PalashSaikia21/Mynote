@@ -35,7 +35,7 @@ export default function Comments({ noteId }) {
 
     try {
       const response = await fetch(
-        `http://localhost:3400/notes/getComment/${noteId}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/getComment/${noteId}`,
         {
           headers: { authorization: `Bearer ${user.token}` },
         }
@@ -68,7 +68,7 @@ export default function Comments({ noteId }) {
       };
 
       const response = await fetch(
-        `http://localhost:3400/notes/postComment/${noteId}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/postComment/${noteId}`,
         {
           method: "POST",
           headers: {
@@ -98,7 +98,7 @@ export default function Comments({ noteId }) {
     const user = JSON.parse(localStorage.getItem("user"));
     try {
       await fetch(
-        `http://localhost:3400/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/getLikes/${likeStatus}/${id}/${typeOn}`,
         {
           headers: { authorization: `Bearer ${user.token}` },
         }

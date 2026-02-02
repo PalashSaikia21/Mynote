@@ -101,7 +101,7 @@ export default function Editnotes({ thisNote, setActiveView }) {
     try {
       const user = JSON.parse(localStorage.getItem("user"));
       const response = await fetch(
-        `http://localhost:3400/notes/updateNote/${thisNote._id}`,
+        `https://mynotebackend-qmqy.onrender.com/notes/updateNote/${thisNote._id}`,
         {
           method: "POST",
           headers: {

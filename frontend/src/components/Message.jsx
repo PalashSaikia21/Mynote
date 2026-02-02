@@ -16,7 +16,9 @@ export default function Message({ setActiveView, otherUserId, isNested }) {
     queryKey: ["chat", userId],
     queryFn: () =>
       axios
-        .get(`http://localhost:3400/user/message/${userId}/${user._id}`)
+        .get(
+          `https://mynotebackend-qmqy.onrender.com/user/message/${userId}/${user._id}`
+        )
         .then((res) => res.data),
     refetchInterval: 3000,
   });
@@ -25,7 +27,7 @@ export default function Message({ setActiveView, otherUserId, isNested }) {
     if (!message.trim()) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/user/message/${userId}`,
+        `https://mynotebackend-qmqy.onrender.com/user/message/${userId}`,
         {
           method: "POST",
           headers: {

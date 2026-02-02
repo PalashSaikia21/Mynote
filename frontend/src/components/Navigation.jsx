@@ -44,7 +44,9 @@ export default function Navigation({
     if (publicNotes.length > 0) return;
     setIsLoadingSearch(true);
     try {
-      const response = await fetch(`http://localhost:3400/notes/SearchNote`);
+      const response = await fetch(
+        `https://mynotebackend-qmqy.onrender.com/notes/SearchNote`
+      );
       if (!response.ok) throw new Error("Failed to fetch notes.");
       const data = await response.json();
       setPublicNotes(data.notes || []);
@@ -78,7 +80,7 @@ export default function Navigation({
     if (!user?._id || !user?.token) return;
     try {
       const response = await fetch(
-        `http://localhost:3400/user/notifications/${user._id}`,
+        `https://mynotebackend-qmqy.onrender.com/user/notifications/${user._id}`,
         {
           headers: { authorization: `Bearer ${user.token}` },
         }
@@ -105,10 +107,13 @@ export default function Navigation({
     if (!notiId) return;
     setSelectedNotification(null);
     try {
-      await fetch(`http://localhost:3400/user/readNotifications/${notiId}`, {
-        method: "PUT",
-        headers: { authorization: `Bearer ${user.token}` },
-      });
+      await fetch(
+        `https://mynotebackend-qmqy.onrender.com/user/readNotifications/${notiId}`,
+        {
+          method: "PUT",
+          headers: { authorization: `Bearer ${user.token}` },
+        }
+      );
       checkNotifications();
     } catch (e) {
       console.error(e);

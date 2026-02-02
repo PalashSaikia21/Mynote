@@ -41,7 +41,7 @@ export default function Changepassword({
     try {
       //alert("This is a demo. Password change functionality is disabled.");
       const response = await axios.post(
-        `http://localhost:3400/changePassword`,
+        `https://mynotebackend-qmqy.onrender.com/changePassword`,
         {
           occassion: occassion,
           email: email, //this can be username or email
