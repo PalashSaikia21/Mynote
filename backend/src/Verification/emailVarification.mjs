@@ -1,48 +1,47 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import {
   Verification_Email_Template,
   Welcome_Email_Template,
 } from "./emailTemplate.mjs";
 
-// Moving the transporter creation inside a function to ensure
-// process.env is fully loaded before use.
-const getTransporter = () => {
-  return nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true, // Use TLS
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS, // Your 16-character App Password
-    },
-    socketTimeout: 5000,
-    connectionTimeout: 5000,
-    connectionTimeout: 10000, // Stop trying after 10 seconds
-  });
-};
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const sendVerificationEmail = async (to, token) => {
-  const transporter = getTransporter(); // Read env variables NOW
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "MyNote <onboarding@resend.dev>", // temporary sender
+      to,
+      subject: "Verify Your Email",
+      html: Verification_Email_Template.replace("{verificationCode}", token),
+    });
 
-  const info = await transporter.sendMail({
-    from: `"MyNote Support" <${process.env.GMAIL_USER}>`,
-    to,
-    subject: "Verify Your Email",
-    text: `Your OTP is ${token}`,
-    html: Verification_Email_Template.replace("{verificationCode}", token),
-  });
-  console.log("Email Sent: %s", info.messageId);
+    if (error) {
+      console.error("Resend Error:", error);
+      return;
+    }
+
+    console.log("Email sent:", data);
+  } catch (err) {
+    console.error("Unexpected Error:", err);
+  }
 };
 
 export const sendWelcomeEmail = async (to, name) => {
-  const transporter = getTransporter(); // Read env variables NOW
+  try {
+    const { data, error } = await resend.emails.send({
+      from: "MyNote <onboarding@resend.dev>",
+      to,
+      subject: "Welcome to MyNote",
+      html: Welcome_Email_Template.replace("{name}", name),
+    });
 
-  const info = await transporter.sendMail({
-    from: `"MyNote Support" <${process.env.GMAIL_USER}>`,
-    to,
-    subject: "Welcome to MyNote",
-    text: `Welcome ${name}!`,
-    html: Welcome_Email_Template.replace("{name}", name),
-  });
-  console.log("Message sent: %s", info.messageId);
+    if (error) {
+      console.error("Resend Error:", error);
+      return;
+    }
+
+    console.log("Email sent:", data);
+  } catch (err) {
+    console.error("Unexpected Error:", err);
+  }
 };
