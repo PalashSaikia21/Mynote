@@ -26,9 +26,9 @@ export default function Signup() {
     try {
       const payload = { name, email, password, passwordConfirm, username };
       const response = await axios.post(`${config.apiUrl}/register`, payload);
+      setLoading(false);
 
-      if (response.status === 201) {
-        setLoading(false);
+      if (response.status !== 404) {
         navigate(`/login?username=${encodeURIComponent(username)}`);
         // navigate("/login");
       }
