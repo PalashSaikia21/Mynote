@@ -15,29 +15,32 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = async (e) => {
-    setLoading(true);
     e.preventDefault();
+    setLoading(true);
     setError("");
 
     if (password !== passwordConfirm) {
+      setLoading(false); // MUST reset here
       return setError("Passphrases do not match.");
     }
 
     try {
       const payload = { name, email, password, passwordConfirm, username };
       const response = await axios.post(`${config.apiUrl}/register`, payload);
-      setLoading(false);
 
-      if (response.status !== 404) {
+      // FIX: Check for 200 OR 201. Some production proxies change status codes.
+      if (response.status === 201 || response.status === 200) {
+        setLoading(false); // Turn off BEFORE navigating
         navigate(`/login?username=${encodeURIComponent(username)}`);
-        // navigate("/login");
+      } else {
+        setLoading(false);
+        setError("Unexpected response from server.");
       }
     } catch (err) {
-      const message =
-        err.response?.data?.message || "Enrolment failed. Please try again.";
+      setLoading(false); // Ensure loader stops
+      const message = err.response?.data?.message || "Enrolment failed.";
       setError(message);
-      console.log("Signup error:", error);
-    } finally {
+      console.error("Signup error:", err); // Use 'err' from catch, not 'error' from state
     }
   };
 
