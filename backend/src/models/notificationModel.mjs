@@ -40,10 +40,6 @@ const notificationSchema = new mongoose.Schema(
 );
 
 // Crucial for performance:
-notificationSchema.index(
-  { targetModel: 1, targetId: 1, actorId: 1 },
-  { unique: true }
-);
-notificationSchema.index({ recipientId: 1 }, { createdAt: -1 });
+notificationSchema.index({ targetModel: 1, targetId: 1, actorId: 1 });
 
 export default mongoose.model("Notification", notificationSchema);
