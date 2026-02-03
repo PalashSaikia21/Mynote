@@ -28,6 +28,7 @@ export default function Signup() {
       const response = await axios.post(`${config.apiUrl}/register`, payload);
 
       if (response.status === 201) {
+        setLoading(false);
         navigate(`/login?username=${encodeURIComponent(username)}`);
         // navigate("/login");
       }
@@ -37,7 +38,6 @@ export default function Signup() {
       setError(message);
       console.log("Signup error:", error);
     } finally {
-      setLoading(false);
     }
   };
 
