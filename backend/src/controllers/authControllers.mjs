@@ -80,7 +80,7 @@ const postRegister = async (req, res) => {
       // If you kept the fields required, you'd have to pass
       // the newUser._id as the actor and target just to satisfy Mongoose.
     });
-    // await sendWelcomeEmail(email, name);
+    sendWelcomeEmail(email, name);
     userId = newUser._id;
     res.status(201).json({ message: "User registered successfully", userId });
   } catch (error) {
