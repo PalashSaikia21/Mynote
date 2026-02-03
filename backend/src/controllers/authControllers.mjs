@@ -70,17 +70,17 @@ const postRegister = async (req, res) => {
     console.log("New user created:", newUser);
     const content = `Welcome ${name}, You're in. We kept it simple: Write notes, find people, and stay organized. No bloat, no nonsense. Change your profile settings and setup security question and answer. Need help? contact us anytime. Happy noting!`;
 
-    // await Notification.create({
-    //   recipientId: newUser._id,
-    //   targetModel: "User",
-    //   content: content,
-    //   targetId: newUser._id,
-    //   isRead: false,
-    //   isSeen: false,
-    //   // If you kept the fields required, you'd have to pass
-    //   // the newUser._id as the actor and target just to satisfy Mongoose.
-    // });
-    await sendWelcomeEmail(email, name);
+    await Notification.create({
+      recipientId: newUser._id,
+      targetModel: "User",
+      content: content,
+      targetId: newUser._id,
+      isRead: false,
+      isSeen: false,
+      // If you kept the fields required, you'd have to pass
+      // the newUser._id as the actor and target just to satisfy Mongoose.
+    });
+    // await sendWelcomeEmail(email, name);
     userId = newUser._id;
     res.status(201).json({ message: "User registered successfully", userId });
   } catch (error) {
