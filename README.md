@@ -1,0 +1,2 @@
+# Mynote
+my note repo
