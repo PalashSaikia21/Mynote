@@ -55,7 +55,9 @@ export default function Profile() {
           },
         }
       );
-      alert("Verification code sent to your email.");
+      alert(
+        "Verification code sent to your email. Please check in spam folder if you don't see it."
+      );
     } catch (error) {
       console.error("Error requesting OTP:", error);
       setOtpSent(false);
@@ -64,7 +66,7 @@ export default function Profile() {
 
   const handleEmailChange = async () => {
     try {
-      setOtpSent(true); // Show input field immediately for feedback
+      //setOtpSent(true); // Show input field immediately for feedback
       const response = await axios.post(
         `${config.apiUrl}/changeEmail`,
         { email: emailInput, username: user.username },
@@ -79,7 +81,7 @@ export default function Profile() {
       if (response.status === 200) {
         setChangeEmailMode(false);
         setProfileData(response.data.user);
-        sendOtp();
+        //sendOtp();
       }
     } catch (error) {
       if (error.response?.status === 400) {
@@ -211,7 +213,7 @@ export default function Profile() {
                               className="text-[#8B4513]/50 hover:text-[#8B4513]"
                             />
                           </button>
-                          <button
+                          {/* <button
                             onClick={
                               !profileData.isUserVerified ? sendOtp : undefined
                             }
@@ -225,7 +227,7 @@ export default function Profile() {
                                 ? "Verified"
                                 : "Click to verify email"
                             }
-                          />
+                          /> */}
                         </div>
                       </div>
                     )}

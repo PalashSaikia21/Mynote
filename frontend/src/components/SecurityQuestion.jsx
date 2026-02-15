@@ -54,10 +54,9 @@ export default function Securityquestion({
       await setProfileData(data.data.user);
       if (data.status === 200) {
         setIsSecurityModalOpen(false); // Update profile data with new security question
-        alert("Your security question has been updated successfully.");
       }
     } catch (err) {
-      alert("From handle security change");
+      alert("error updating security question! Please try again.");
     }
   };
 
@@ -73,7 +72,9 @@ export default function Securityquestion({
           },
         }
       );
-      alert("Verification code sent to your email.");
+      alert(
+        "Verification code sent to your email. Pvvvvvlease check in Spam if you don't see it in your inbox."
+      );
     } catch (error) {
       console.error("Error requesting OTP:", error);
       setOtpSent(false);
@@ -204,7 +205,7 @@ export default function Securityquestion({
             />
           </div>
           <div className="flex justify-end">
-            <button
+            {/* <button
               type="button"
               onClick={(e) => {
                 e.preventDefault();
@@ -213,7 +214,7 @@ export default function Securityquestion({
               className="text-xs font-bold text-[#B45309] hover:text-[#92400E] transition-colors"
             >
               Verify using OTP!
-            </button>
+            </button> */}
             {otpSent && (
               <div className="flex items-center gap-2 mt-2 animate-in fade-in slide-in-from-left-2">
                 <input
